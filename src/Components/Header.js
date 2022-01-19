@@ -2,7 +2,6 @@ import Navigation from "./Navigation.js";
 // App Header
 const Header = (prop) => {
   
-  console.log(prop);
   return (
     <div>
       <header>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -8,54 +8,58 @@ import MainContent from './Components/MainContent.js';
 import Footer from './Components/Footer.js';
 
 function App() {
-  const [art, setArt] = useState({}); // artArray, setArt
-  const [userInput, setUserInput] = useState(""); // userInput, setUserInput
-  const [searchTerm, setSearchTerm] = useState(""); // searchTerm, setSearchTerm
+  const [art, setArt] = useState({}); 
+  const [userInput, setUserInput] = useState(""); 
+  const [searchTerm, setSearchTerm] = useState("");
 
   function randomIndex(array) {
-  return randomIndex = Math.floor(Math.random() * array.length)
+      return Math.floor(Math.random() * array.length);      
   }
 
-  useEffect(() => {
+  function getData() {
+    console.log("our app is running!")
     axios({
       url: "https://collectionapi.metmuseum.org/public/collection/v1/search",
       method: "GET",
       dataResponse: "json",
       params: {
         q: userInput,
-        // isHighlight: true,
       },
     })
-      .then((response) => {
-        console.log(response.data.objectIDs);
-        const randomID = randomIndex(response.data.objectIDs);
-        console.log(randomID);
-        return axios({
-          url: `https://collectionapi.metmuseum.org/public/collection/v1/objects/${response.data.objectIDs[randomID]}`,
-        });
-      })
-      .then((response) => {
-        console.log(response.data);
-        setArt(response.data); // use setArt
+    .then((response) => {
+      const randomID = randomIndex(response.data.objectIDs);
+      return axios({
+        url: `https://collectionapi.metmuseum.org/public/collection/v1/objects/${response.data.objectIDs[randomID]}`,
       });
-  }, [searchTerm]); 
+    })
+    .then((response) => {
+      console.log(response.data);
+      setArt(response.data);
+    })
+    .catch((error) => {
+      alert("Sorry we don't have that in our database!")
+      console.log(error);
+    });
+   }
 
   // input onChange - captures string
   const handleInput = (event) => {
     setUserInput(event.target.value); // set userinput
   };
 
-  // when search is submitted 
+  // when search is submitted - call the api
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSearchTerm(userInput); // get the input
+    setSearchTerm(userInput); 
+    getData();
+    setUserInput("");
   };
 
   // pass in functions as props to child
   return (
     <div className="App">
       <Header input={handleInput} submit={handleSubmit} value={userInput}/>
-      <MainContent art={art}/>
+        <MainContent art={art} search={searchTerm}/>
       <Footer />
     </div>
   );

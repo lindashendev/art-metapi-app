@@ -1,25 +1,34 @@
 // Main Content 
 const MainContent = (prop) => {
-
-  const {artistDisplayName, artistDisplayBio, department, dimensions, medium, primaryImageSmall, repository, title, isHighlight} = prop.art;
+  const artObject = prop.art;
+  const {artistDisplayName, artistDisplayBio, department, dimensions, medium, primaryImageSmall, repository, title, GalleryNumber, creditLine} = prop.art;
 
   return ( 
     <main className="wrapper">
-      <div className="artDisplay">
-        <div className="imgContainer">
-          <img src={primaryImageSmall} alt={`${title} by ${artistDisplayName}`}  />
+      {
+        artObject.objectID &&
+        (
+        <>
+        <p>An art piece for {prop.search}</p>
+        <div className="artDisplay">
+          <div className="imgContainer">
+            <img src={primaryImageSmall} alt={`${title} by ${artistDisplayName}`}  />
+          </div>
+          <div className="description">
+            <h2>{title}</h2>       
+            {artistDisplayName && <p><span>Artist Name:</span> {artistDisplayName}</p>}
+            {creditLine && <p><span>Credit Line:</span> {creditLine}</p>}         
+            {GalleryNumber && <p><span>Gallery:</span> {GalleryNumber}</p>}
+            {artistDisplayBio && <p><span>Biography:</span> {artistDisplayBio}</p>}
+            {department && <p><span>Department:</span> {department}</p>}
+            {dimensions && <p><span>Dimensions:</span> {dimensions}</p>}
+            {medium && <p><span>Medium:</span> {medium}</p>  }
+            {repository && <p><span>Repository:</span> {repository}</p>  }
+          </div>              
         </div>
-        <div className="description">
-          <h2>{title}</h2>
-          <p><span>Highlight:</span> {isHighlight}</p>         
-          <p><span>Artist Name:</span> {artistDisplayName}</p>
-          <p><span>Biography:</span> {artistDisplayBio}</p>
-          <p><span>Department:</span> {department}</p>
-          <p><span>Dimensions:</span> {dimensions}</p>
-          <p><span>Medium:</span> {medium}</p>  
-          <p><span>Repository:</span> {repository}</p>  
-        </div>
-      </div>
+        </>
+        ) 
+      }
     </main>
   )
 }
