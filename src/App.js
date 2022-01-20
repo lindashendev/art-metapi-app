@@ -44,7 +44,7 @@ function App() {
 
   // input onChange - captures string
   const handleInput = (event) => {
-    setUserInput(event.target.value); // set userinput
+    setUserInput(event.target.value); 
   };
 
   // when search is submitted - call the api
@@ -59,7 +59,7 @@ function App() {
   return (
     <div className="App">
       <Header input={handleInput} submit={handleSubmit} value={userInput}/>
-        <MainContent art={art} search={searchTerm}/>
+      <MainContent art={art} search={searchTerm}/>
       <Footer />
     </div>
   );

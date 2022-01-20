@@ -1,7 +1,7 @@
 // Main Content 
 const MainContent = (prop) => {
   const artObject = prop.art;
-  const {artistDisplayName, artistDisplayBio, department, dimensions, medium, primaryImageSmall, repository, title, GalleryNumber, creditLine} = prop.art;
+  const {artistDisplayName, artistDisplayBio, department, dimensions, medium, primaryImageSmall, repository, title, GalleryNumber, creditLine, tags} = prop.art;
 
   return ( 
     <main className="wrapper">
@@ -23,7 +23,19 @@ const MainContent = (prop) => {
             {department && <p><span>Department:</span> {department}</p>}
             {dimensions && <p><span>Dimensions:</span> {dimensions}</p>}
             {medium && <p><span>Medium:</span> {medium}</p>  }
-            {repository && <p><span>Repository:</span> {repository}</p>  }
+            {repository && <p><span>Repository:</span> {repository}</p>}
+            <ul className="tags">
+            <p>Tag Info</p>
+              {
+                tags.map((tag, index) => {
+                  return (
+                  <li key={index}>
+                    <p>{tag.term}</p>
+                  </li>
+                  )
+                })
+              }                
+            </ul>
           </div>              
         </div>
         </>

@@ -18,6 +18,7 @@ html {
 body {
   text-align: center;
   font-family: 'DM Sans', sans-serif;
+  background-color: #fff;
 }
 
 /* wrapper */
@@ -27,7 +28,7 @@ body {
   max-width: 1200px;
 }
 
-/* typography styles */
+/* heading styles */
 h1,
 h2, 
 h3,
@@ -45,12 +46,13 @@ p {
   margin: 0;
 }
 
-/* navigation */
+/* navigation background*/
 nav {
   background-color: black;
   color: white;
 }
 
+/* nav flex */
 .nav {
   display: flex;
   justify-content: space-between;
@@ -58,13 +60,8 @@ nav {
   flex-wrap: wrap;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-}
-
-nav li {
-  list-style-type: none;
+nav p {
+  padding: 1rem 0;
 }
 
 /* header */
@@ -73,9 +70,17 @@ nav li {
   flex-direction: column;
   align-items: center;
   row-gap: 1.5rem;
-  padding-bottom: 2rem;
   justify-content: flex-end;
   display: flex;
+}
+
+/* image width */
+img {
+  width: 100%;
+}
+
+span {
+  font-weight: 700;
 }
 
 /* input form */
@@ -84,6 +89,7 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 input, button {
@@ -95,6 +101,7 @@ input {
   width: 70%;
   border: 1px solid grey;
   padding-left: 0.75rem;
+  border-radius: 4px 0 0 4px;
 }
 
 button {
@@ -103,33 +110,32 @@ button {
   background-color: #723C4F;
   color: white;
   border: 1px solid #723C4F; 
+  border-radius: 0 4px 4px 0;
 }
 
 /* main art display */
+main {
+  padding: 1.25rem 0;
+}
+
 main > p {
-  color: rgb(101, 101, 101);
+  color: #656565;
   margin: 2rem 0;
 }
 
+/*  */
 .artDisplay {
-  background-color: rgb(240, 240, 240);
+  background-color: #ebebeb;
   padding: 2rem 2rem;
   display: flex;
   column-gap: 3rem;
   text-align: left;  
 }
 
+
 .imgContainer,
 .description {
   width: 50%;
-}
-
-img {
-  width: 100%;
-}
-
-span {
-  font-weight: 700;
 }
 
 .description h2 {
@@ -142,13 +148,45 @@ h2 ~ p {
   margin-top: 0.25rem;
 }
 
-/* footer styles */
+/* tags in results */
+.tags {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+}
+
+.tags > p:first-child {
+  font-weight: 700;
+  margin: 0.5rem 0;
+  flex-basis: 100%;
+}
+
+.tags li {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  list-style: none;
+  border: 1px solid rgb(188, 125, 16);
+  color: rgb(188, 125, 16);
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+/* footer general styles */
 .footer {
   margin-top: 3rem;
   border-top: 1px solid black;
   padding: 1rem;
 }
 
-.footer p {
-  margin-top: 0.5rem;
+footer p {
+  margin-top: 0.5rem; 
+}
+
+footer a {
+  text-decoration: none;
+  color: inherit;
 }
