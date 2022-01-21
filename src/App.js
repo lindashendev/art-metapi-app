@@ -7,7 +7,7 @@ import Header from './Components/Header.js';
 import MainContent from './Components/MainContent.js';
 import Footer from './Components/Footer.js';
 import { Link, Routes, Route } from 'react-router-dom';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
+import { getDatabase, ref, onValue, push, remove } from 'firebase/database';
 // import SavedArt from './Components/SavedArt';
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
       const newState = [];
       const data = response.val();
       for(let key in data) {
-        newState.push(data[key]);
+        newState.push({key: key, name: data[key]});
       }
       setSave(newState);
     })
@@ -93,6 +93,13 @@ function App() {
     );
   }
 
+  const handleRemove = (artId) => {
+    console.log(artId);
+    const database = getDatabase(firebase);
+    const dbRef = ref(database,`/${artId}`);
+    remove(dbRef);
+  }
+
   const SavedArt = () => {
     return (
       <div className="images wrapper">
@@ -100,11 +107,16 @@ function App() {
         <div className='saved'>
           <ul>
             {
-              save.map((art, index) => {
+              save.map((art) => {
+                console.log(art);
+                console.log(art.key);
                 return(
-                  <li key={index}>
-                    <img src={art} alt="saved image" />                    
-                  </li>
+                  <>
+                    <li key={art.key}>
+                      <img src={art.name} alt="saved image" />       
+                      <button onClick={() => handleRemove(art.key)}>Remove</button>                                   
+                    </li>
+                  </>
                 )
               })
             }
@@ -113,6 +125,7 @@ function App() {
       </div>
     );
   }
+  
   // pass in functions as props to child
   return (
     <div className="App">
