@@ -2,7 +2,9 @@
 const MainContent = (prop) => {
   const artObject = prop.art;
   const {artistDisplayName, artistDisplayBio, department, dimensions, medium, primaryImageSmall, repository, title, GalleryNumber, creditLine, tags} = prop.art;
-
+  const handleSave = prop.save;
+  // use save
+  console.log(handleSave);
   return ( 
     <main className="wrapper">
       {
@@ -15,6 +17,7 @@ const MainContent = (prop) => {
             <img src={primaryImageSmall} alt={`${title} by ${artistDisplayName}`}  />
           </div>
           <div className="description">
+            <button onClick={() => handleSave(primaryImageSmall)}>Save</button>
             <h2>{title}</h2>       
             {artistDisplayName && <p><span>Artist Name:</span> {artistDisplayName}</p>}
             {creditLine && <p><span>Credit Line:</span> {creditLine}</p>}         
