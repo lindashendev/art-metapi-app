@@ -6,7 +6,7 @@ import firebase from './firebase.js';
 import Header from './Components/Header.js';
 import MainContent from './Components/MainContent.js';
 import Footer from './Components/Footer.js';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, useParams } from 'react-router-dom';
 import { getDatabase, ref, onValue, push, remove } from 'firebase/database';
 // import SavedArt from './Components/SavedArt';
 
@@ -17,7 +17,7 @@ function App() {
 
   // stateful array for firebase to store images
   const [save, setSave] = useState([]);
-  const [userSave, setUserSave] = useState('');
+  const [userSave, setUserSave] = useState([]);
 
   function randomIndex(array) {
       return Math.floor(Math.random() * array.length);      
@@ -35,11 +35,15 @@ function App() {
       }
       setSave(newState);
     })
-  }, [])
+  }, [setUserSave])
 
   const handleUserSave = (url) => {
+    // console.log("hi");
     const saveUrl = url;
+    // console.log(url);
+    // console.log(saveUrl);
     setUserSave(saveUrl);
+    // console.log(userSave);
     const database = getDatabase(firebase);
     const dbRef = ref(database);
     push(dbRef, userSave);    
@@ -62,7 +66,7 @@ function App() {
       });
     })
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setArt(response.data);
     })
     .catch(() => {
@@ -86,7 +90,7 @@ function App() {
   const Home = () => {
     return (
       <>
-        <Header input={handleInput} submit={handleSubmit} value={userInput} />
+        {/* <Header input={handleInput} submit={handleSubmit} value={userInput} /> */}
         <MainContent art={art} search={searchTerm} save={handleUserSave}/>
         <Footer />
       </>
@@ -94,36 +98,39 @@ function App() {
   }
 
   const handleRemove = (artId) => {
-    console.log(artId);
+    // console.log(artId);
     const database = getDatabase(firebase);
     const dbRef = ref(database,`/${artId}`);
     remove(dbRef);
   }
 
   const SavedArt = () => {
-    return (
-      <div className="images wrapper">
-        <h2>Your Saved Art</h2>
-        <div className='saved'>
-          <ul>
-            {
-              save.map((art) => {
-                console.log(art);
-                console.log(art.key);
-                return(
-                  <>
-                    <li key={art.key}>
-                      <img src={art.name} alt="saved image" />       
-                      <button onClick={() => handleRemove(art.key)}>Remove</button>                                   
-                    </li>
-                  </>
-                )
-              })
-            }
-          </ul>
+    const {saved} = useParams();
+    if (saved) {
+      return (
+        <div className="images wrapper">
+          <h2>Your Saved Art</h2>
+          <div className='saved'>
+            <ul>
+              {
+                save.map((art, index) => {
+                  // console.log(art);
+                  // console.log(art.key);
+                  return(
+                    <>
+                      <li key={index}>
+                        <img src={art.name} alt="saved image" />       
+                        <button onClick={() => handleRemove(art.key)}>Remove</button>                                   
+                      </li>
+                    </>
+                  )
+                })
+              }
+            </ul>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
   
   // pass in functions as props to child
@@ -141,9 +148,10 @@ function App() {
           </ul>
         </div>
       </nav>
+      <Header input={handleInput} submit={handleSubmit} value={userInput} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/saved" element={<SavedArt />} />
+        <Route path="/:saved" element={<SavedArt />} />
       </Routes>
     </div>
   );

@@ -13,7 +13,7 @@ const Header = (prop) => {
               type="text"
               id="userQuery"
               onChange={prop.input}
-              autoFocus="autoFocus"
+              // autoFocus="autoFocus"
               value={prop.value} placeholder="Search by keyword"
             />
             <button>Search</button>
