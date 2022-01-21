@@ -17,7 +17,7 @@ const MainContent = (prop) => {
             <img src={primaryImageSmall} alt={`${title} by ${artistDisplayName}`}  />
           </div>
           <div className="description">
-            <button onClick={() => handleSave(primaryImageSmall)}>Save</button>
+            <button onClick={() => handleSave(primaryImageSmall, title)}>Save</button>
             <h2>{title}</h2>       
             {artistDisplayName && <p><span>Artist Name:</span> {artistDisplayName}</p>}
             {creditLine && <p><span>Credit Line:</span> {creditLine}</p>}         

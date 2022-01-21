@@ -31,18 +31,18 @@ function App() {
       const newState = [];
       const data = response.val();
       for(let key in data) {
-        newState.push({key: key, name: data[key]});
+        newState.push({key: key, title: key, name: data[key]});
       }
       setSave(newState);
     })
   }, [setUserSave])
 
-  const handleUserSave = (url) => {
+  const handleUserSave = (url, title) => {
     // console.log("hi");
-    const saveUrl = url;
+    const saveArtObj = {url, title};
     // console.log(url);
     // console.log(saveUrl);
-    setUserSave(saveUrl);
+    setUserSave(saveArtObj);
     // console.log(userSave);
     const database = getDatabase(firebase);
     const dbRef = ref(database);
@@ -113,16 +113,14 @@ function App() {
           <div className='saved'>
             <ul>
               {
-                save.map((art, index) => {
+                save.map((art) => {
                   // console.log(art);
                   // console.log(art.key);
                   return(
-                    <>
-                      <li key={index}>
-                        <img src={art.name} alt="saved image" />       
+                      <li key={art.key}>
+                        <img src={art.name.url} alt={art.name.title} />       
                         <button onClick={() => handleRemove(art.key)}>Remove</button>                                   
                       </li>
-                    </>
                   )
                 })
               }
