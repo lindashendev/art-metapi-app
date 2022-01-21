@@ -69,12 +69,13 @@ ul, li {
 
 /* header */
 .header {
-  height: 25vh;
+  height: 30vh;
+  display: flex;
   flex-direction: column;
+  margin-top: 3rem;
   align-items: center;
   row-gap: 1.5rem;
   justify-content: flex-end;
-  display: flex;
 }
 
 /* image width */

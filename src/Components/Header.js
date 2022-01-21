@@ -10,7 +10,7 @@ const Header = (prop) => {
           <h1>
             Met Highlights
           </h1>
-          <p>Save your favourite works from Met Museum Art Collection.</p>
+          <p>Save your favourite works from the Met Museum Art Collection.</p>
           <form onSubmit={prop.submit}>
             <label className="sr-only">Search by keyword</label>
             <input
