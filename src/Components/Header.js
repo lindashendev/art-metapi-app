@@ -1,6 +1,6 @@
+// App Header
 import Navigation from "./Navigation.js";
 
-// App Header
 const Header = (prop) => {
   return (
     <div>
@@ -8,9 +8,9 @@ const Header = (prop) => {
         <Navigation />
         <div className="header wrapper">
           <h1>
-            Met <span>Highlights</span> 
+            Met Highlights
           </h1>
-          <p>See Met Museum Art Highlights. Get started by searching.</p>
+          <p>Save your favourite works from Met Museum Art Collection.</p>
           <form onSubmit={prop.submit}>
             <label className="sr-only">Search by keyword</label>
             <input

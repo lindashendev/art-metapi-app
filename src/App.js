@@ -10,11 +10,12 @@ import { getDatabase, ref, onValue, push, remove } from 'firebase/database';
 import SavedArt from './Components/SavedArt';
 
 function App() {
+  // create useStates
   const [art, setArt] = useState({}); 
   const [userInput, setUserInput] = useState(""); 
   const [searchTerm, setSearchTerm] = useState("");
 
-  // stateful array for firebase to store images
+  // Stateful array for firebase to store images
   const [save, setSave] = useState([]);
   const [userSave, setUserSave] = useState([]);
 
@@ -22,7 +23,7 @@ function App() {
       return Math.floor(Math.random() * array.length);      
   }
 
-  // firebase
+  // Firebase
   useEffect(() => {
     const database = getDatabase(firebase);
     const dbRef = ref(database);
@@ -71,12 +72,12 @@ function App() {
     });
    }
 
-  // input onChange - captures string
+  // Input onChange - captures string
   const handleInput = (event) => {
     setUserInput(event.target.value); 
   };
 
-  // when search is submitted - call the api
+  // When search is submitted - call the api
   const handleSubmit = (event) => {
     event.preventDefault();
     setSearchTerm(userInput); 

@@ -4,6 +4,8 @@ const MainContent = (prop) => {
 
   // destructure prop
   const {artistDisplayName, artistDisplayBio, department, dimensions, medium, primaryImageSmall, repository, title, GalleryNumber, creditLine, tags} = prop.art;
+
+  // save function
   const handleSave = prop.save;
 
   return ( 
@@ -17,8 +19,8 @@ const MainContent = (prop) => {
           <div className="imgContainer">
             <img src={primaryImageSmall} alt={`${title} by ${artistDisplayName}`}  />
           </div>
-          <div className="description">
-            
+
+          <div className="description">  
             <button className="save-btn" onClick={() => handleSave(primaryImageSmall, title)}>Save</button>
             <h2>{title}</h2>       
             {artistDisplayName && <p><span>Artist Name:</span> {artistDisplayName}</p>}
@@ -30,6 +32,7 @@ const MainContent = (prop) => {
             {medium && <p><span>Medium:</span> {medium}</p>  }
             {repository && <p><span>Repository:</span> {repository}</p>}
             {tags && (
+              
               <ul className="tags">
                 <p>Tag Info</p>
                   {
