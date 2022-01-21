@@ -1,3 +1,4 @@
+// SavedArt.js
 const SavedArt = (prop) => {
   const {save, handleRemove} = prop;
 
@@ -10,7 +11,7 @@ const SavedArt = (prop) => {
             return (
               <li key={art.key}>
                 <img src={art.name.url} alt={art.name.title} />
-                <button onClick={() => handleRemove(art.key)}>Remove</button>
+                <button className="remove-btn" onClick={() => handleRemove(art.key)}>Remove</button>
               </li>
             );
           })}

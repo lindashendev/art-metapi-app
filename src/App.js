@@ -49,7 +49,6 @@ function App() {
   }, [userSave])
 
   function getData() {
-    console.log("our app is running!")
     axios({
       url: "https://collectionapi.metmuseum.org/public/collection/v1/search",
       method: "GET",

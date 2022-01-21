@@ -18,7 +18,6 @@ html {
 body {
   text-align: center;
   font-family: 'DM Sans', sans-serif;
-  background-color: #ede9e4;
 }
 
 /* wrapper */
@@ -40,11 +39,7 @@ h5 {
 
 h1 {
   font-size: 3rem;
-  color: #723C4F;
-}
-
-h1 > span {
-  width: 100%;
+  color: #000000;
 }
 
 p {
@@ -53,7 +48,7 @@ p {
 
 /* navigation background*/
 nav {
-  background-color: #43222e;
+  background-color: #000000;
   text-align: left;
   color: white;
 }
@@ -61,6 +56,11 @@ nav {
 nav p {
   width: 25%;
   padding: 1rem 0;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
 }
 
 /* header */
@@ -100,7 +100,7 @@ input {
   width: 70%;
   border: 1px solid grey;
   padding-left: 0.75rem;
-  border-radius: 4px 0 0 4px;
+  border-radius: 1.5rem 0 0 1.5rem;
 }
 
 button {
@@ -109,7 +109,7 @@ button {
   background-color: #723C4F;
   color: white;
   border: 1px solid #723C4F; 
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 1.5rem 1.5rem 0;
 }
 
 /* main art display */
@@ -122,33 +122,19 @@ main > p {
   margin: 2rem 0;
 }
 
-/* images */
-/* .images {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 20px;
-  row-gap: 20px;
-} */
-
 .images h2 {
   flex-basis: 100%;
   text-align: left;
   padding: 2rem 0;
 }
 
-/* .images div {
-  width: calc((100% / 4) - 20px);
-  height: 250px;
-  border-radius: 5px;
-} */
-
 /* art */
 .artDisplay {
   background-color: #d7cfc7;
-  padding: 2rem 2rem;
+  text-align: left;  
+  padding: 2rem;
   display: flex;
   column-gap: 3rem;
-  text-align: left;  
 }
 
 .imgContainer,
@@ -168,8 +154,6 @@ h2 ~ p {
 
 /* tags in results */
 .tags {
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-wrap: wrap;
   column-gap: 0.5rem;
@@ -184,8 +168,8 @@ h2 ~ p {
 
 .tags li {
   text-transform: uppercase;
-  letter-spacing: 1px;
   font-size: 0.8rem;
+  letter-spacing: 1px;
   list-style: none;
   border: 1px solid rgb(188, 125, 16);
   color: rgb(188, 125, 16);
@@ -206,8 +190,9 @@ div.saved {
   row-gap: 1rem;
   flex-wrap: wrap;
 }
+
 .saved li {
-  width: calc((100% / 3) - 1rem);
+  width: calc((100% / 6) - 1rem);
   display: inline-block;
   list-style: none;
 }
@@ -216,6 +201,19 @@ div.saved {
   height: 300px;
   object-fit: cover;
   border-radius: 20px;
+}
+
+.remove-btn,
+.save-btn {
+  border-radius: 2rem;
+  width: 100%;
+}
+
+.save-btn {
+  position: relative;
+  right: 0;
+  top: 0;
+  width: 30%;
 }
 
 /* footer general styles */
@@ -232,4 +230,78 @@ footer p {
 footer a {
   text-decoration: none;
   color: inherit;
+}
+
+@media (max-width: 940px) {
+  .saved li {
+  width: calc((100% / 4) - 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+
+  .header {
+    height: 30vh;
+    padding-top: 6rem;
+    justify-content: center;
+  }
+
+  nav p {
+    width: 50%;
+  }
+
+  .artDisplay {
+    flex-direction: column;
+  }
+
+  .save-btn {
+    margin-top: 1rem;
+    width: 30%;
+  }
+
+  .imgContainer,
+  .description {
+    width: 100%;
+  }
+  .saved li {
+  width: calc((100% / 2) - 1rem);
+  }
+}
+
+@media (max-width: 600px) {
+  form {
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+  input {
+    width: 100%;
+    border-radius: 1.5rem;
+  }
+  
+  button {
+    width: 100%;
+    border-radius: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .save-btn {
+    margin-top: 1rem;
+    width: 50%;
+  }
+
+  .header {
+    height: 40vh;
+  }
+
+  .saved li {
+  width: 100%;
+  }
 }

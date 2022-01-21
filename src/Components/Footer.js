@@ -1,4 +1,4 @@
-// Footer component 
+// Footer.js
 function Footer() {
   return (
     <footer>
