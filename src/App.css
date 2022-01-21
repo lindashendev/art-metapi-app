@@ -219,13 +219,22 @@ div.saved {
 }
 
 .saved ul {
+  padding-left: 0;
   display: flex;
+  column-gap: 1rem;
+  row-gap: 1rem;
   flex-wrap: wrap;
 }
 .saved li {
-  width: calc((100% / 4) - 20px);
+  width: calc((100% / 3) - 1rem);
   display: inline-block;
   list-style: none;
+}
+
+.saved img {
+  height: 300px;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 /* footer general styles */
