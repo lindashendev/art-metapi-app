@@ -18,7 +18,7 @@ html {
 body {
   text-align: center;
   font-family: 'DM Sans', sans-serif;
-  background-color: #fff;
+  background-color: #ede9e4;
 }
 
 /* wrapper */
@@ -39,7 +39,8 @@ h5 {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
+  color: #723C4F;
 }
 
 h1 > span {
@@ -52,33 +53,13 @@ p {
 
 /* navigation background*/
 nav {
-  background-color: black;
-  position: relative;
-  top: 0;
-  left: 0;
+  background-color: #43222e;
+  text-align: left;
   color: white;
 }
 
-nav ul {
-  margin: 0;
-}
-
-nav a {
-  text-decoration: none;
-  color: #fff;
-}
-
-nav ul {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 0;
-}
-
-nav li {
-  list-style: none;
-}
-
 nav p {
+  width: 25%;
   padding: 1rem 0;
 }
 
@@ -163,7 +144,7 @@ main > p {
 
 /* art */
 .artDisplay {
-  background-color: #ebebeb;
+  background-color: #d7cfc7;
   padding: 2rem 2rem;
   display: flex;
   column-gap: 3rem;

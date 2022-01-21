@@ -6,9 +6,8 @@ import firebase from './firebase.js';
 import Header from './Components/Header.js';
 import MainContent from './Components/MainContent.js';
 import Footer from './Components/Footer.js';
-import { Link, Routes, Route, useParams } from 'react-router-dom';
 import { getDatabase, ref, onValue, push, remove } from 'firebase/database';
-// import SavedArt from './Components/SavedArt';
+import SavedArt from './Components/SavedArt';
 
 function App() {
   const [art, setArt] = useState({}); 
@@ -35,19 +34,19 @@ function App() {
       }
       setSave(newState);
     })
-  }, [setUserSave])
+
+  }, [])
 
   const handleUserSave = (url, title) => {
-    // console.log("hi");
     const saveArtObj = {url, title};
-    // console.log(url);
-    // console.log(saveUrl);
     setUserSave(saveArtObj);
-    // console.log(userSave);
+  }
+  
+  useEffect(() => {
     const database = getDatabase(firebase);
     const dbRef = ref(database);
     push(dbRef, userSave);    
-  }
+  }, [userSave])
 
   function getData() {
     console.log("our app is running!")
@@ -66,7 +65,6 @@ function App() {
       });
     })
     .then((response) => {
-      // console.log(response.data);
       setArt(response.data);
     })
     .catch(() => {
@@ -87,70 +85,18 @@ function App() {
     setUserInput("");
   };
 
-  const Home = () => {
-    return (
-      <>
-        {/* <Header input={handleInput} submit={handleSubmit} value={userInput} /> */}
-        <MainContent art={art} search={searchTerm} save={handleUserSave}/>
-        <Footer />
-      </>
-    );
-  }
-
   const handleRemove = (artId) => {
-    // console.log(artId);
     const database = getDatabase(firebase);
     const dbRef = ref(database,`/${artId}`);
     remove(dbRef);
   }
-
-  const SavedArt = () => {
-    const {saved} = useParams();
-    if (saved) {
-      return (
-        <div className="images wrapper">
-          <h2>Your Saved Art</h2>
-          <div className='saved'>
-            <ul>
-              {
-                save.map((art) => {
-                  // console.log(art);
-                  // console.log(art.key);
-                  return(
-                      <li key={art.key}>
-                        <img src={art.name.url} alt={art.name.title} />       
-                        <button onClick={() => handleRemove(art.key)}>Remove</button>                                   
-                      </li>
-                  )
-                })
-              }
-            </ul>
-          </div>
-        </div>
-      );
-    }
-  }
   
-  // pass in functions as props to child
   return (
     <div className="App">
-      <nav>
-        <div className="wrapper">
-          <ul>
-            <li>
-              <Link to="/">Met Highlights</Link>
-            </li>
-            <li>
-              <Link to="/saved">Saved Art</Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
       <Header input={handleInput} submit={handleSubmit} value={userInput} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:saved" element={<SavedArt />} />
-      </Routes>
+      <MainContent art={art} search={searchTerm} save={handleUserSave} />
+      <SavedArt save={save} handleRemove={handleRemove}/>
+      <Footer />
     </div>
   );
 }
